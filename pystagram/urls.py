@@ -14,12 +14,11 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 from photos import views
 from django.contrib.auth import views as auth_views
-
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -35,6 +34,7 @@ urlpatterns = [
         auth_views.LogoutView.as_view(next_page=settings.LOGIN_URL),
         name = 'logout'
     ),
+    path('users/', include('profiles.urls')),
 ]
 
 urlpatterns += static('upload_files', document_root=settings.MEDIA_ROOT)
